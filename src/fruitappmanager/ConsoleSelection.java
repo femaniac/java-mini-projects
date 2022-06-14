@@ -5,13 +5,19 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class ConsoleSelection {
+    public enum Choices {
+        SHOW_ALL, ADD, REMOVE, EDIT;
+    }
+
     private InputStream stream;
-    private  PrintStream printStream;
+    private PrintStream printStream;
+
     public ConsoleSelection(InputStream inputStream, PrintStream printStream) {
         this.stream = inputStream;
         this.printStream = printStream;
     }
-    public int readSelection() {
+
+    public Choices readSelection() {
         int selection;
         Scanner userInput = new Scanner(stream);
         printStream.println("PRODUCT MANAGER");
@@ -25,7 +31,8 @@ public class ConsoleSelection {
 
         selection = userInput.nextInt();
 
-        return selection;
+        return Choices.values()[selection - 1]; // enum starts from 0
+
     }
 
     public Fruit newFruitMenu() {

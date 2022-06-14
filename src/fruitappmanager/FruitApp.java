@@ -18,24 +18,24 @@ public class FruitApp {
     public static void main(String[] args) {
         FruitBucket bucket = new FruitBucket(defaultFruitBucket());
         ConsoleSelection ui = new ConsoleSelection(System.in, System.out);
-        int userChoice;
         Fruit fruit;
-
+        ConsoleSelection.Choices userChoice;
         while (true) {
             userChoice = ui.readSelection();
+
             switch (userChoice) {
-                case 1:
+                case SHOW_ALL:
                     ui.showAllFruits(bucket);
                     break;
-                case 2:
+                case ADD:
                     fruit = ui.newFruitMenu();
                     bucket.add(fruit);
                     break;
-                case 3:
+                case REMOVE:
                     fruit = ui.selectFruit(bucket);
                     bucket.delete(fruit.getId());
                     break;
-                case 4:
+                case EDIT:
                     fruit = ui.selectFruit(bucket);
                     bucket.update(fruit.getId(), fruit);
                 default:
