@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class ConsoleSelection {
+public class CommandlineUI {
     public enum Choices {
         SHOW_ALL, ADD, REMOVE, EDIT;
     }
@@ -12,7 +12,7 @@ public class ConsoleSelection {
     private InputStream stream;
     private PrintStream printStream;
 
-    public ConsoleSelection(InputStream inputStream, PrintStream printStream) {
+    public CommandlineUI(InputStream inputStream, PrintStream printStream) {
         this.stream = inputStream;
         this.printStream = printStream;
     }
@@ -32,7 +32,6 @@ public class ConsoleSelection {
         selection = userInput.nextInt();
 
         return Choices.values()[selection - 1]; // enum starts from 0
-
     }
 
     public Fruit newFruitMenu() {
@@ -56,7 +55,7 @@ public class ConsoleSelection {
         return new Fruit(inputId, inputName, inputPrice, inputAmount);
     }
 
-    public void showAllFruits(FruitBucket bucket) {
+    public void showAll(FruitBasket bucket) {
         for (Fruit fruit : bucket.listAll()) {
             printStream.println("----------------------------");
             printStream.println("Code: " + fruit.getId());
@@ -66,7 +65,7 @@ public class ConsoleSelection {
         }
     }
 
-    public Fruit selectFruit(FruitBucket bucket) {
+    public Fruit selectFruitMenu(FruitBasket bucket) {
         Scanner userInputs = new Scanner(stream);
         printStream.println("Please choose the product you wish to delete bellow.");
         for (Fruit item : bucket.listAll()) {
